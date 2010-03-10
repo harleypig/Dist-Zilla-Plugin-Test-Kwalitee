@@ -14,6 +14,10 @@ no Moose;
 
 =pod
 
+=for test_synopsis
+1;
+__END__
+
 =head1 SYNOPSIS
 
 In C<dist.ini>:
