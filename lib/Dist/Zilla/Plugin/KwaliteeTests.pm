@@ -5,7 +5,7 @@ use warnings;
 package Dist::Zilla::Plugin::KwaliteeTests;
 # ABSTRACT: release tests for kwalitee
 use Moose;
-use Test::Kwalitee;
+use Test::Kwalitee ();
 extends 'Dist::Zilla::Plugin::InlineFiles';
 
 __PACKAGE__->meta->make_immutable;
