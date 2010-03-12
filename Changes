@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - removed weaver.ini since that's handled in Dist::Zilla's [@MARCEL] now
+    - list Test::Kwalitee in dist.ini so we don't use() it anymore
 
 1.100690  2010-03-10 23:43:35 Europe/Vienna
     - original version
