@@ -11,11 +11,13 @@ __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
 
-=pod
+=begin :prelude
 
 =for test_synopsis
 1;
 __END__
+
+=end :prelude
 
 =head1 SYNOPSIS
 
@@ -41,4 +43,3 @@ use Test::More;
 eval "use Test::Kwalitee";
 plan skip_all => "Test::Kwalitee required for testing kwalitee"
   if $@;
-
