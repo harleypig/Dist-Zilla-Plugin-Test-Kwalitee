@@ -1,2 +1,3 @@
 Dist-Zilla-Plugin-KwaliteeTests-*
+Dist-Zilla-Plugin-Test-Kwalitee-*
 .build
