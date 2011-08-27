@@ -3,48 +3,53 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::KwaliteeTests;
-# ABSTRACT: Release tests for kwalitee
+# ABSTRACT: ( DEPRECATED Use Dist::Zilla::Plugin::Test::Kwalitee ) Release tests for kwalitee
 use Moose;
-extends 'Dist::Zilla::Plugin::InlineFiles';
-with 'Dist::Zilla::Role::TextTemplate';
 
-sub mvp_multivalue_args { return qw( skiptest ) }
+extends 'Dist::Zilla::Plugin::Test::Kwalitee';
 
-has skiptest => (
-  is      => 'ro',
-  isa     => 'ArrayRef[Str]',
-  traits  => [ 'Array' ],
-  default => sub { [] },
-  handles => {
-    push_skiptest => 'push'
-  },
-);
+before register_component => sub { warn "!!! [KwaliteeTests] is DEPRECATED. Please use Test::Kwalitee\n" };
 
-around add_file => sub {
-
-  my ( $orig, $self, $file ) = @_;
-
-  my $skiptests = q{eval "use Test::Kwalitee";};
-
-  if ( @{ $self->skiptest } > 0 ) {
-
-    my $skip = join ' ', map { "-$_" } @{ $self->skiptest };
-
-    $skiptests = qq{eval {
-  require Test::Kwalitee;
-  Test::Kwalitee->import( tests => [ qw( $skip ) ]);
-};
-};
-
-  }
-
-  $self->$orig(
-    Dist::Zilla::File::InMemory->new( {
-      'name'    => $file->name,
-      'content' => $self->fill_in_string( $file->content, { 'skiptests' => \$skiptests } ),
-    } ),
-  );
-};
+#extends 'Dist::Zilla::Plugin::InlineFiles';
+#with 'Dist::Zilla::Role::TextTemplate';
+#
+#sub mvp_multivalue_args { return qw( skiptest ) }
+#
+#has skiptest => (
+#  is      => 'ro',
+#  isa     => 'ArrayRef[Str]',
+#  traits  => [ 'Array' ],
+#  default => sub { [] },
+#  handles => {
+#    push_skiptest => 'push'
+#  },
+#);
+#
+#around add_file => sub {
+#
+#  my ( $orig, $self, $file ) = @_;
+#
+#  my $skiptests = q{eval "use Test::Kwalitee";};
+#
+#  if ( @{ $self->skiptest } > 0 ) {
+#
+#    my $skip = join ' ', map { "-$_" } @{ $self->skiptest };
+#
+#    $skiptests = qq{eval {
+#  require Test::Kwalitee;
+#  Test::Kwalitee->import( tests => [ qw( $skip ) ]);
+#};
+#};
+#
+#  }
+#
+#  $self->$orig(
+#    Dist::Zilla::File::InMemory->new( {
+#      'name'    => $file->name,
+#      'content' => $self->fill_in_string( $file->content, { 'skiptests' => \$skiptests } ),
+#    } ),
+#  );
+#};
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
@@ -59,6 +64,8 @@ __END__
 =end :prelude
 
 =head1 SYNOPSIS
+
+DEPRECATED Use Dist::Zilla::Plugin::Test::Kwalitee
 
 In C<dist.ini>:
 
