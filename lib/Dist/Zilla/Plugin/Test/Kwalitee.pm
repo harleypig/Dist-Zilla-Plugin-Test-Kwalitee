@@ -5,8 +5,8 @@ use warnings;
 package Dist::Zilla::Plugin::Test::Kwalitee;
 # ABSTRACT: Release tests for kwalitee
 use Moose;
-extends 'Dist::Zilla::Plugin::InlineFiles';
-with 'Dist::Zilla::Role::TextTemplate';
+use Data::Section -setup;
+with 'Dist::Zilla::Role::FileGatherer','Dist::Zilla::Role::TextTemplate';
 
 sub mvp_multivalue_args { return qw( skiptest ) }
 
@@ -20,9 +20,8 @@ has skiptest => (
   },
 );
 
-around add_file => sub {
-
-  my ( $orig, $self, $file ) = @_;
+sub gather_files {
+  my ( $self, ) = @_;
 
   my $skiptests = q{eval "use Test::Kwalitee";};
 
@@ -30,20 +29,26 @@ around add_file => sub {
 
     my $skip = join ' ', map { "-$_" } @{ $self->skiptest };
 
-    $skiptests = qq{eval {
+    $skiptests = qq[eval {
   require Test::Kwalitee;
   Test::Kwalitee->import( tests => [ qw( $skip ) ]);
-};
-};
+};];
 
   }
+  require Dist::Zilla::File::InMemory;
 
-  $self->$orig(
-    Dist::Zilla::File::InMemory->new( {
-      'name'    => $file->name,
-      'content' => $self->fill_in_string( $file->content, { 'skiptests' => \$skiptests } ),
-    } ),
-  );
+  for my $filename ( qw( xt/release/kwalitee.t ) ) {
+    my $content = $self->fill_in_string(
+      ${$self->section_data($filename)},
+      { skiptests => \$skiptests },
+    );
+    $self->add_file(
+      Dist::Zilla::File::InMemory->new( {
+        'name'    => $filename,
+        'content' => $content,
+      } ),
+    );
+  }
 };
 
 __PACKAGE__->meta->make_immutable;
