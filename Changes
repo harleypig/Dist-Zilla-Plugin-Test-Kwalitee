@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.112410  2011-08-29 09:57:31 America/Boise
     - Made pod coverage test pass ( HarleyPig )
     - Fixed error with tests needing 'plan' defined ( Kent Fredric)
     - Replace 2-phase inject/munge with 1-phase inject ( Kent Fredric )
