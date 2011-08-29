@@ -80,6 +80,7 @@ following file:
 =begin Pod::Coverage
 
   mvp_multivalue_args
+  gather_files
 
 =end Pod::Coverage
 
