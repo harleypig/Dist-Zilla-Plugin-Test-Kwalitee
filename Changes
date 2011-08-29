@@ -1,6 +1,9 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - Fixed error with tests needing 'plan' defined ( Kent Fredric)
+    - Replace 2-phase inject/munge with 1-phase inject ( Kent Fredric )
+    - Add some tests for our test being run ( Kent Fredric )
 
 1.112400  2011-08-28 09:34:37 America/Boise
 
