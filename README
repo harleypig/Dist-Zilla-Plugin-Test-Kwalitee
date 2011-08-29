@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::Test::Kwalitee - Release tests for kwalitee
 
 VERSION
-    version 1.112400
+    version 1.112410
 
 SYNOPSIS
     In "dist.ini":
@@ -22,6 +22,8 @@ AUTHORS
     *   Caleb Cushing <xenoterracide@gmail.com>
 
     *   Marcel Gruenauer <marcel@cpan.org>
+
+    *   Kent Fredric <kentfredric@gmail.com>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2011 by Alan Young.
