@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+2.020000  2011-09-07 20:47:05 America/Boise
     - Provide a deprecation warning (Mike Doherty)
     - Moved switch_namespace branch to master ( HarleyPig )
     - brought dist.ini up to date ( HarleyPig )
