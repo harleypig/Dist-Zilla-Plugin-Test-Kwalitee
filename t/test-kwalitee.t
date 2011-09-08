@@ -20,6 +20,12 @@ my $expected_file = $builddir->subdir('xt')->subdir('release')->file('kwalitee.t
 chdir $sourcedir;
 
 $tzil->build;
+END { # Remove (empty) dir created by building the dists
+    require File::Path;
+    my $tmp = $tempdir->parent;
+    chdir $tmp->parent;
+    File::Path::remove_tree($tmp, { keep_root => 0 });
+}
 
 ok( -e $expected_file, 'test created' );
 chdir $builddir;
@@ -50,4 +56,3 @@ if ( not $success ) {
   };
 }
 done_testing;
-
