@@ -2,6 +2,8 @@ Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
     - Provide a deprecation warning (Mike Doherty)
+    - Moved switch_namespace branch to master ( HarleyPig )
+    - brought dist.ini up to date ( HarleyPig )
 
 1.112410  2011-08-29 09:57:31 America/Boise
     - Made pod coverage test pass ( HarleyPig )

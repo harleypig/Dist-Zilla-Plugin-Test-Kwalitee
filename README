@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::Test::Kwalitee - Release tests for kwalitee
 
 VERSION
-    version 1.112410
+    version 2.020000
 
 SYNOPSIS
     In "dist.ini":
