@@ -41,11 +41,21 @@ my ( $result, $output, $error, $errflags );
   $errflags = { '@' => $@, '!' => $!, '?' => $? };
 }
 my $success = 1;
+# ABOUT: This test =================
+#
+# What this test is doing is running dzil on the bundled sub-distribution
+# in t/test-kwalitee
+#
+# That distribution is KNOWNINGLY and INTENTIONALLY broken.
+#
+# This test simply greps for useful substrings emitted by that test,
+# to indicate the tests were running.
+#
+# Note: when you see diag output below, you're seeing output from a
+# **CHILD** test run, inside dzil.
+#
 isnt( $result, 0, 'Test ran , and failed, as intended' ) or do { $success = 0 };
-like( $output, qr/ok.*extractable/m,   'Test dist was extractable' )   or do { $success = 0 };
 like( $output, qr/ok.*no_symlinks/m,   'Test dist lacked symlinks' )   or do { $success = 0 };
-like( $output, qr/ok.*proper_libs/m,   'Test dist has proper libs' )   or do { $success = 0 };
-like( $output, qr/ok.*no_pod_errors/m, 'Test dist has no pod errors' ) or do { $success = 0 };
 
 if ( not $success ) {
   diag explain {
