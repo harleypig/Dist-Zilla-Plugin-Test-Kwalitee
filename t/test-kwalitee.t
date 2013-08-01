@@ -42,10 +42,7 @@ my ( $result, $output, $error, $errflags );
 }
 my $success = 1;
 isnt( $result, 0, 'Test ran , and failed, as intended' ) or do { $success = 0 };
-like( $output, qr/ok.*extractable/m,   'Test dist was extractable' )   or do { $success = 0 };
 like( $output, qr/ok.*no_symlinks/m,   'Test dist lacked symlinks' )   or do { $success = 0 };
-like( $output, qr/ok.*proper_libs/m,   'Test dist has proper libs' )   or do { $success = 0 };
-like( $output, qr/ok.*no_pod_errors/m, 'Test dist has no pod errors' ) or do { $success = 0 };
 
 if ( not $success ) {
   diag explain {
